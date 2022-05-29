@@ -14,15 +14,17 @@ import Style from './styles.module.scss';
 import AddIcon from '@mui/icons-material/Add';
 
 const Products = (props) => {
-    const { setTotalProduct, totalProduct } = props;
+    const { setTotalProduct, totalProduct, setEnable } = props;
     const {form} = Style;
     const [product, setProduct] = useState({
-        productName: 1,
-        unit: 1,
-        qty: 1,
-        price: 700000,
+        productName: null,
+        unit: null,
+        qty: null,
+        price: null,
         totalPrice: 0,
     });
+
+    (product.totalPrice <= 0) ? setEnable(false) : setEnable(true);
 
     useEffect(() => {
         setProduct({

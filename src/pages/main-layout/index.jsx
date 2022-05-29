@@ -29,6 +29,7 @@ const MainLayout = () => {
     const [name, setName] = useState([]);
     const [totalProduct, setTotalProduct] = useState(1);
     const [highlightedDays, setHighlightedDays] = useState([1, 2, 15]);
+    const [ enable, setEnable ] = useState(false);
 
     const [detail, setDetail] = useState({
         name: null,
@@ -85,15 +86,15 @@ const MainLayout = () => {
         {name: 'DC Tanggerang'}, 
         {name: 'DC Cikarang'}
     ];
-    console.log('totalProduct', totalProduct);
-    const AllProducts = () => {
-        for (var i=1; i <= totalProduct; i++){
-            return <Products setTotalProduct={setTotalProduct} totalProduct={totalProduct} />;
-        }
-    }
-    useEffect(() => {
-        AllProducts();
-    }, [totalProduct])
+
+    // const AllProducts = () => {
+    //     for (var i=1; i <= totalProduct; i++){
+    //         return <Products setTotalProduct={setTotalProduct} totalProduct={totalProduct} />;
+    //     }
+    // }
+    // useEffect(() => {
+    //     AllProducts();
+    // }, [totalProduct])
 
   return (
     <Box sx={{ width:'100%', height: '100%', backgroundColor: '#fff' }}>
@@ -237,14 +238,18 @@ const MainLayout = () => {
                     Products
                 </Typography>
             </Grid>
-            <AllProducts />
+            <Products setTotalProduct={setTotalProduct} totalProduct={totalProduct} setEnable={setEnable} />
         </Grid>
        </div>
        <div className={root}>
         <Divider style={{margin : '20px 0px'}} />
         <Grid container style={{justifyContent: 'flex-end', gap: '20px'}}>
             <Button size="medium" style={{color: '#000', fontWeight: '600'}}>Cancel</Button>
-            <Button disabled variant="contained" size="medium" color="success"  /* style={{backgroundColor : "#4E944F", color: '#fff', fontWeight: '600'}} */> Confirm</Button>
+            {enable 
+                ? <Button variant="contained" size="medium" color="success"> Confirm</Button>
+                : <Button variant="contained" disabled size="medium" color="success"> Confirm</Button>
+            }
+            
         </Grid>
        </div>
     </Box>
